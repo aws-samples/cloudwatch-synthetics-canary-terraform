@@ -1,0 +1,9 @@
+name   = "my-canary"
+runtime_version = "syn-nodejs-puppeteer-3.7"
+take_screenshot = false
+api_hostname = "mydomain.internal"
+api_path = "/path?param=value"
+vpc_id = "vpc_id"
+subnet_ids = ["subnet_id1"]
+frequency = 5
+alert_sns_topic = "arn:aws:sns:eu-central-1:111111111111:yyyyy"
