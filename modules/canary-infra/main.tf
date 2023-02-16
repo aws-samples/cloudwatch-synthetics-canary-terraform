@@ -69,6 +69,21 @@ resource "aws_s3_bucket_policy" "canaries_reports_bucket-policy" {
         }
         Action   = ["s3:*"]
         Resource = ["${aws_s3_bucket.canaries_reports_bucket.arn}/*"]
+      },
+      {
+        "Sid": "AllowSSLRequestsOnly",
+        "Action": "s3:*",
+        "Effect": "Deny",
+        "Resource": [
+          aws_s3_bucket.canaries_reports_bucket.arn,
+          "${aws_s3_bucket.canaries_reports_bucket.arn}/*"
+        ],
+        "Condition": {
+          "Bool": {
+            "aws:SecureTransport": "false"
+          }
+        },
+        "Principal": "*"
       }
     ]
   })
@@ -94,6 +109,11 @@ resource "aws_iam_role" "canary-role" {
   tags = {
     Name = "canary"
   }
+}
+
+resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
+  role       = aws_iam_role.canary-role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
 data "aws_iam_policy_document" "canary-policy" {
