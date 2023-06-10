@@ -6,10 +6,11 @@
 The objective of this code is to remove as many difficulties as possible when trying to deploy canaries with terraform.  
 
 ## Overview
+See this AWS prescriptive document for more details: [Deploy CloudWatch Synthetics canaries by using Terraform](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-cloudwatch-synthetics-canaries-by-using-terraform.html). 
 This repo is composed of two modules: one to setup the [common infrastructure](./modules/canary-infra/README.md) required for all canaries and [one to setup a canary](./modules/canary/README.md) testing a specific API.  
 The canary module has been designed to deploy a canary testing an API only privately available.  
 The canary must run in the VPC where the API is deployed and have a security group allowing to call the API.  
-An example terraform script using the two modules has been provided in: [main.tf](main.tf).   
+An example terraform script using the two modules has been provided in: [main.tf](main.tf).  
 
 ## Security
 
