@@ -42,9 +42,11 @@ resource "aws_s3_bucket_lifecycle_configuration" "canaries_reports_bucket_lifecy
   }
 }
 
-resource "aws_s3_bucket_acl" "canaries_reports_bucket_acl" {
+resource "aws_s3_bucket_ownership_controls" "canaries_reports_bucket_ownership_controls" {
   bucket = aws_s3_bucket.canaries_reports_bucket.bucket
-  acl    = "private"
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "canaries_reports_bucket_block_public_access" {
