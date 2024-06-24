@@ -6,7 +6,12 @@ variable "name" {
 variable "runtime_version" {
     description= "Runtime version of the canary. Details: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_nodejs_puppeteer.html"
     type = string
-    default = "syn-nodejs-puppeteer-3.7"
+    default = "syn-nodejs-puppeteer-7.0"
+
+    validation {
+        condition     = contains(["syn-nodejs-puppeteer-7.0", "syn-nodejs-puppeteer-6.2"], var.runtime_version)
+        error_message = "Valid values for runtime versions are: syn-nodejs-puppeteer-7.0, syn-nodejs-puppeteer-6.2"
+    }
 }
 
 variable "take_screenshot" {

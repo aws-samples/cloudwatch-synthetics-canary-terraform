@@ -87,12 +87,14 @@ const loadUrl = async function (page, url, takeScreenshot) {
         }
     });
 
-// Wait for 15 seconds to let page load fully before taking screenshot.
+    // Wait for 15 seconds to let page load fully before taking screenshot.
     if (domcontentloaded && takeScreenshot) {
-        await page.waitFor(15000);
+        await new Promise(r => setTimeout(r, 15000));
         await synthetics.takeScreenshot(stepName, 'loaded');
-        await resetPage(page);
     }
+
+    // Reset page
+    await resetPage(page);
 };
 
 const urls = [];

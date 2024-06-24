@@ -1,19 +1,3 @@
-terraform {
-    required_providers {
-        aws = {
-            source  = "hashicorp/aws"
-            version = "4.31.0"
-        }
-        archive = {
-            source  = "hashicorp/archive"
-            version = "= 2.2.0"
-        }
-    }
-
-    required_version = "~> 1.3.0"
-}
-
-
 // Setup of the common Infrastructure
 module "canary_infra" {
     source = "./modules/canary-infra"
